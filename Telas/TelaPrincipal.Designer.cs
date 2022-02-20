@@ -33,7 +33,7 @@ namespace GestorDeEstoque.Telas
             this.cadastrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unidadeDeMedidaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.produtosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridUnidadeMedida = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.lblSigla = new System.Windows.Forms.Label();
             this.lblDescricao = new System.Windows.Forms.Label();
@@ -42,7 +42,7 @@ namespace GestorDeEstoque.Telas
             this.txtDescricao = new System.Windows.Forms.TextBox();
             this.PainelCadastroUnidadeMedida = new System.Windows.Forms.Panel();
             this.panelCadastroProduto = new System.Windows.Forms.Panel();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dataGridProduto = new System.Windows.Forms.DataGridView();
             this.txtQuantidade = new System.Windows.Forms.NumericUpDown();
             this.comboUnd = new System.Windows.Forms.ComboBox();
             this.txtvalor = new System.Windows.Forms.NumericUpDown();
@@ -57,11 +57,19 @@ namespace GestorDeEstoque.Telas
             this.btnSalvar = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
             this.btnVoltar = new System.Windows.Forms.Button();
+            this.CODIGOPRODUTO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DESCRICAOPRODUTO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UNIDADEMEDIDA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VALOR = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QUANTIDADE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CODIGO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SIGLA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DESCRICAO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridUnidadeMedida)).BeginInit();
             this.PainelCadastroUnidadeMedida.SuspendLayout();
             this.panelCadastroProduto.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridProduto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtQuantidade)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtvalor)).BeginInit();
             this.PainelBotoes.SuspendLayout();
@@ -100,13 +108,21 @@ namespace GestorDeEstoque.Telas
             this.produtosToolStripMenuItem.Text = "Produtos";
             this.produtosToolStripMenuItem.Click += new System.EventHandler(this.produtosToolStripMenuItem_Click);
             // 
-            // dataGridView1
+            // dataGridUnidadeMedida
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 65);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(757, 327);
-            this.dataGridView1.TabIndex = 8;
+            this.dataGridUnidadeMedida.AllowUserToAddRows = false;
+            this.dataGridUnidadeMedida.AllowUserToDeleteRows = false;
+            this.dataGridUnidadeMedida.AllowUserToOrderColumns = true;
+            this.dataGridUnidadeMedida.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridUnidadeMedida.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CODIGO,
+            this.SIGLA,
+            this.DESCRICAO});
+            this.dataGridUnidadeMedida.Location = new System.Drawing.Point(12, 65);
+            this.dataGridUnidadeMedida.Name = "dataGridUnidadeMedida";
+            this.dataGridUnidadeMedida.ReadOnly = true;
+            this.dataGridUnidadeMedida.Size = new System.Drawing.Size(757, 327);
+            this.dataGridUnidadeMedida.TabIndex = 8;
             // 
             // label1
             // 
@@ -142,6 +158,7 @@ namespace GestorDeEstoque.Telas
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(100, 20);
             this.txtCodigo.TabIndex = 5;
+            this.txtCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodigo_KeyPress);
             // 
             // txtSigla
             // 
@@ -167,7 +184,7 @@ namespace GestorDeEstoque.Telas
             this.PainelCadastroUnidadeMedida.Controls.Add(this.lblDescricao);
             this.PainelCadastroUnidadeMedida.Controls.Add(this.lblSigla);
             this.PainelCadastroUnidadeMedida.Controls.Add(this.label1);
-            this.PainelCadastroUnidadeMedida.Controls.Add(this.dataGridView1);
+            this.PainelCadastroUnidadeMedida.Controls.Add(this.dataGridUnidadeMedida);
             this.PainelCadastroUnidadeMedida.Location = new System.Drawing.Point(12, 43);
             this.PainelCadastroUnidadeMedida.Name = "PainelCadastroUnidadeMedida";
             this.PainelCadastroUnidadeMedida.Size = new System.Drawing.Size(776, 395);
@@ -176,7 +193,7 @@ namespace GestorDeEstoque.Telas
             // 
             // panelCadastroProduto
             // 
-            this.panelCadastroProduto.Controls.Add(this.dataGridView2);
+            this.panelCadastroProduto.Controls.Add(this.dataGridProduto);
             this.panelCadastroProduto.Controls.Add(this.txtQuantidade);
             this.panelCadastroProduto.Controls.Add(this.comboUnd);
             this.panelCadastroProduto.Controls.Add(this.txtvalor);
@@ -193,13 +210,22 @@ namespace GestorDeEstoque.Telas
             this.panelCadastroProduto.TabIndex = 3;
             this.panelCadastroProduto.Visible = false;
             // 
-            // dataGridView2
+            // dataGridProduto
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(12, 104);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(757, 288);
-            this.dataGridView2.TabIndex = 10;
+            this.dataGridProduto.AllowUserToAddRows = false;
+            this.dataGridProduto.AllowUserToOrderColumns = true;
+            this.dataGridProduto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridProduto.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CODIGOPRODUTO,
+            this.DESCRICAOPRODUTO,
+            this.UNIDADEMEDIDA,
+            this.VALOR,
+            this.QUANTIDADE});
+            this.dataGridProduto.Location = new System.Drawing.Point(12, 104);
+            this.dataGridProduto.Name = "dataGridProduto";
+            this.dataGridProduto.ReadOnly = true;
+            this.dataGridProduto.Size = new System.Drawing.Size(757, 288);
+            this.dataGridProduto.TabIndex = 10;
             // 
             // txtQuantidade
             // 
@@ -242,6 +268,7 @@ namespace GestorDeEstoque.Telas
             this.txtCodigoProduto.Name = "txtCodigoProduto";
             this.txtCodigoProduto.Size = new System.Drawing.Size(100, 20);
             this.txtCodigoProduto.TabIndex = 5;
+            this.txtCodigoProduto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodigoProduto_KeyPress);
             // 
             // label6
             // 
@@ -320,6 +347,7 @@ namespace GestorDeEstoque.Telas
             this.btnExcluir.TabIndex = 1;
             this.btnExcluir.Text = "Excluir";
             this.btnExcluir.UseVisualStyleBackColor = true;
+            this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
             // btnVoltar
             // 
@@ -331,6 +359,64 @@ namespace GestorDeEstoque.Telas
             this.btnVoltar.UseVisualStyleBackColor = true;
             this.btnVoltar.Click += new System.EventHandler(this.btnVoltar_Click_1);
             // 
+            // CODIGOPRODUTO
+            // 
+            this.CODIGOPRODUTO.DataPropertyName = "CodigoProduto";
+            this.CODIGOPRODUTO.HeaderText = "Código";
+            this.CODIGOPRODUTO.Name = "CODIGOPRODUTO";
+            this.CODIGOPRODUTO.ReadOnly = true;
+            // 
+            // DESCRICAOPRODUTO
+            // 
+            this.DESCRICAOPRODUTO.DataPropertyName = "DescricaoProduto";
+            this.DESCRICAOPRODUTO.HeaderText = "Descrição";
+            this.DESCRICAOPRODUTO.Name = "DESCRICAOPRODUTO";
+            this.DESCRICAOPRODUTO.ReadOnly = true;
+            this.DESCRICAOPRODUTO.Width = 300;
+            // 
+            // UNIDADEMEDIDA
+            // 
+            this.UNIDADEMEDIDA.DataPropertyName = "UND";
+            this.UNIDADEMEDIDA.HeaderText = "UND";
+            this.UNIDADEMEDIDA.Name = "UNIDADEMEDIDA";
+            this.UNIDADEMEDIDA.ReadOnly = true;
+            // 
+            // VALOR
+            // 
+            this.VALOR.DataPropertyName = "Valor";
+            this.VALOR.HeaderText = "Valor";
+            this.VALOR.Name = "VALOR";
+            this.VALOR.ReadOnly = true;
+            // 
+            // QUANTIDADE
+            // 
+            this.QUANTIDADE.DataPropertyName = "QuantidadeEstoque";
+            this.QUANTIDADE.HeaderText = "Qtd Estoque";
+            this.QUANTIDADE.Name = "QUANTIDADE";
+            this.QUANTIDADE.ReadOnly = true;
+            // 
+            // CODIGO
+            // 
+            this.CODIGO.DataPropertyName = "IdUnidadeMedida";
+            this.CODIGO.HeaderText = "Código";
+            this.CODIGO.Name = "CODIGO";
+            this.CODIGO.ReadOnly = true;
+            // 
+            // SIGLA
+            // 
+            this.SIGLA.DataPropertyName = "SiglaUnidadeMedida";
+            this.SIGLA.HeaderText = "Sigla";
+            this.SIGLA.Name = "SIGLA";
+            this.SIGLA.ReadOnly = true;
+            // 
+            // DESCRICAO
+            // 
+            this.DESCRICAO.DataPropertyName = "DescricaoUnidadeMedida";
+            this.DESCRICAO.HeaderText = "Descrição";
+            this.DESCRICAO.Name = "DESCRICAO";
+            this.DESCRICAO.ReadOnly = true;
+            this.DESCRICAO.Width = 500;
+            // 
             // TelaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -338,21 +424,23 @@ namespace GestorDeEstoque.Telas
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.PainelBotoes);
-            this.Controls.Add(this.panelCadastroProduto);
             this.Controls.Add(this.PainelCadastroUnidadeMedida);
+            this.Controls.Add(this.panelCadastroProduto);
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(816, 489);
+            this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "TelaPrincipal";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TelaPrincipal";
-            this.Load += new System.EventHandler(this.TelaPrincipal_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridUnidadeMedida)).EndInit();
             this.PainelCadastroUnidadeMedida.ResumeLayout(false);
             this.PainelCadastroUnidadeMedida.PerformLayout();
             this.panelCadastroProduto.ResumeLayout(false);
             this.panelCadastroProduto.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridProduto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtQuantidade)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtvalor)).EndInit();
             this.PainelBotoes.ResumeLayout(false);
@@ -367,7 +455,7 @@ namespace GestorDeEstoque.Telas
         private System.Windows.Forms.ToolStripMenuItem cadastrosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unidadeDeMedidaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem produtosToolStripMenuItem;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridUnidadeMedida;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblSigla;
         private System.Windows.Forms.Label lblDescricao;
@@ -390,6 +478,14 @@ namespace GestorDeEstoque.Telas
         private System.Windows.Forms.FlowLayoutPanel PainelBotoes;
         private System.Windows.Forms.Button btnSalvar;
         private System.Windows.Forms.Button btnVoltar;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dataGridProduto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CODIGOPRODUTO;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DESCRICAOPRODUTO;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UNIDADEMEDIDA;
+        private System.Windows.Forms.DataGridViewTextBoxColumn VALOR;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QUANTIDADE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CODIGO;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SIGLA;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DESCRICAO;
     }
 }
