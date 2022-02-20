@@ -42,6 +42,7 @@ namespace GestorDeEstoque.Telas
             this.txtDescricao = new System.Windows.Forms.TextBox();
             this.PainelCadastroUnidadeMedida = new System.Windows.Forms.Panel();
             this.panelCadastroProduto = new System.Windows.Forms.Panel();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.txtQuantidade = new System.Windows.Forms.NumericUpDown();
             this.comboUnd = new System.Windows.Forms.ComboBox();
             this.txtvalor = new System.Windows.Forms.NumericUpDown();
@@ -56,15 +57,14 @@ namespace GestorDeEstoque.Telas
             this.btnSalvar = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
             this.btnVoltar = new System.Windows.Forms.Button();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.PainelCadastroUnidadeMedida.SuspendLayout();
             this.panelCadastroProduto.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtQuantidade)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtvalor)).BeginInit();
             this.PainelBotoes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -193,6 +193,14 @@ namespace GestorDeEstoque.Telas
             this.panelCadastroProduto.TabIndex = 3;
             this.panelCadastroProduto.Visible = false;
             // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(12, 104);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(757, 288);
+            this.dataGridView2.TabIndex = 10;
+            // 
             // txtQuantidade
             // 
             this.txtQuantidade.DecimalPlaces = 5;
@@ -297,6 +305,7 @@ namespace GestorDeEstoque.Telas
             this.btnSalvar.TabIndex = 0;
             this.btnSalvar.Text = "Salvar";
             this.btnSalvar.UseVisualStyleBackColor = true;
+            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
             // btnExcluir
             // 
@@ -317,14 +326,6 @@ namespace GestorDeEstoque.Telas
             this.btnVoltar.Text = "Voltar";
             this.btnVoltar.UseVisualStyleBackColor = true;
             this.btnVoltar.Click += new System.EventHandler(this.btnVoltar_Click_1);
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(12, 104);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(757, 288);
-            this.dataGridView2.TabIndex = 10;
             // 
             // TelaPrincipal
             // 
@@ -347,10 +348,10 @@ namespace GestorDeEstoque.Telas
             this.PainelCadastroUnidadeMedida.PerformLayout();
             this.panelCadastroProduto.ResumeLayout(false);
             this.panelCadastroProduto.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtQuantidade)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtvalor)).EndInit();
             this.PainelBotoes.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

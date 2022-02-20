@@ -65,5 +65,10 @@ namespace GestorDeEstoque.Telas
             PainelCadastroUnidadeMedida.Visible = false;
             panelCadastroProduto.Visible = false;
         }
+
+        private void btnSalvar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
