@@ -65,6 +65,15 @@ namespace GestorDeEstoque.Telas
             PainelBotoes.Visible = true;
             PainelCadastroUnidadeMedida.Visible = false;
             CarregaGrid();
+
+            
+            List<Modelo.ModeloUnidadeMedida> listaUnidadeMedida = new BLL.UnidadeMedidaBLL().Buscar("");
+            comboUnd.DataSource = listaUnidadeMedida;
+            comboUnd.DisplayMember = "SiglaUnidadeMedida";
+            comboUnd.ValueMember = "IdUnidadeMedida";
+            comboUnd.Text = "";
+
+
         }
 
 
@@ -105,6 +114,7 @@ namespace GestorDeEstoque.Telas
                         txtDescricaoProduto.Text = "";
                         txtQuantidade.Value = 0;
                         txtvalor.Value = 0;
+                        comboUnd.Text = "";
 
                     }
                 }
@@ -174,6 +184,11 @@ namespace GestorDeEstoque.Telas
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            CarregaGrid();
+        }
+
+        private void comboUnd_SelectedIndexChanged(object sender, EventArgs e)
         {
             CarregaGrid();
         }

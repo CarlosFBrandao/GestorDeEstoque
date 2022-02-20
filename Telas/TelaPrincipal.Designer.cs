@@ -29,6 +29,7 @@ namespace GestorDeEstoque.Telas
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.cadastrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unidadeDeMedidaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,6 +66,10 @@ namespace GestorDeEstoque.Telas
             this.CODIGO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SIGLA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DESCRICAO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unidadeMedidaBLLBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.modeloUnidadeMedidaBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.modeloUnidadeMedidaBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.modeloUnidadeMedidaBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridUnidadeMedida)).BeginInit();
             this.PainelCadastroUnidadeMedida.SuspendLayout();
@@ -73,6 +78,10 @@ namespace GestorDeEstoque.Telas
             ((System.ComponentModel.ISupportInitialize)(this.txtQuantidade)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtvalor)).BeginInit();
             this.PainelBotoes.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.unidadeMedidaBLLBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.modeloUnidadeMedidaBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.modeloUnidadeMedidaBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.modeloUnidadeMedidaBindingSource2)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -237,11 +246,14 @@ namespace GestorDeEstoque.Telas
             // 
             // comboUnd
             // 
+            this.comboUnd.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.modeloUnidadeMedidaBindingSource2, "SiglaUnidadeMedida", true));
+            this.comboUnd.DataSource = this.modeloUnidadeMedidaBindingSource1;
             this.comboUnd.FormattingEnabled = true;
             this.comboUnd.Location = new System.Drawing.Point(118, 77);
             this.comboUnd.Name = "comboUnd";
             this.comboUnd.Size = new System.Drawing.Size(121, 21);
             this.comboUnd.TabIndex = 8;
+            this.comboUnd.SelectedIndexChanged += new System.EventHandler(this.comboUnd_SelectedIndexChanged);
             // 
             // txtvalor
             // 
@@ -417,6 +429,22 @@ namespace GestorDeEstoque.Telas
             this.DESCRICAO.ReadOnly = true;
             this.DESCRICAO.Width = 500;
             // 
+            // unidadeMedidaBLLBindingSource
+            // 
+            this.unidadeMedidaBLLBindingSource.DataSource = typeof(BLL.UnidadeMedidaBLL);
+            // 
+            // modeloUnidadeMedidaBindingSource
+            // 
+            this.modeloUnidadeMedidaBindingSource.DataSource = typeof(Modelo.ModeloUnidadeMedida);
+            // 
+            // modeloUnidadeMedidaBindingSource1
+            // 
+            this.modeloUnidadeMedidaBindingSource1.DataSource = typeof(Modelo.ModeloUnidadeMedida);
+            // 
+            // modeloUnidadeMedidaBindingSource2
+            // 
+            this.modeloUnidadeMedidaBindingSource2.DataSource = typeof(Modelo.ModeloUnidadeMedida);
+            // 
             // TelaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -424,8 +452,8 @@ namespace GestorDeEstoque.Telas
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.PainelBotoes);
-            this.Controls.Add(this.PainelCadastroUnidadeMedida);
             this.Controls.Add(this.panelCadastroProduto);
+            this.Controls.Add(this.PainelCadastroUnidadeMedida);
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(816, 489);
@@ -444,6 +472,10 @@ namespace GestorDeEstoque.Telas
             ((System.ComponentModel.ISupportInitialize)(this.txtQuantidade)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtvalor)).EndInit();
             this.PainelBotoes.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.unidadeMedidaBLLBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.modeloUnidadeMedidaBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.modeloUnidadeMedidaBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.modeloUnidadeMedidaBindingSource2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -487,5 +519,9 @@ namespace GestorDeEstoque.Telas
         private System.Windows.Forms.DataGridViewTextBoxColumn CODIGO;
         private System.Windows.Forms.DataGridViewTextBoxColumn SIGLA;
         private System.Windows.Forms.DataGridViewTextBoxColumn DESCRICAO;
+        private System.Windows.Forms.BindingSource modeloUnidadeMedidaBindingSource;
+        private System.Windows.Forms.BindingSource unidadeMedidaBLLBindingSource;
+        private System.Windows.Forms.BindingSource modeloUnidadeMedidaBindingSource2;
+        private System.Windows.Forms.BindingSource modeloUnidadeMedidaBindingSource1;
     }
 }

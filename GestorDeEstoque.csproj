@@ -66,6 +66,8 @@
     <EmbeddedResource Include="Telas\TelaPrincipal.resx">
       <DependentUpon>TelaPrincipal.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\BLL.UnidadeMedidaBLL.datasource" />
+    <None Include="Properties\DataSources\Modelo.ModeloUnidadeMedida.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -88,6 +90,9 @@
       <Project>{53e35681-a18a-4398-b1fa-d713d6b0f0f6}</Project>
       <Name>Modelo</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
