@@ -37,10 +37,6 @@ namespace GestorDeEstoque.Telas
 
         }
 
-        private void PainelCadastroUnidadeMedida_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void TelaPrincipal_Load(object sender, EventArgs e)
         {
@@ -54,10 +50,6 @@ namespace GestorDeEstoque.Telas
             PainelCadastroUnidadeMedida.Visible = false;
         }
 
-        private void PainelBotoes_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void btnVoltar_Click_1(object sender, EventArgs e)
         {
@@ -68,7 +60,59 @@ namespace GestorDeEstoque.Telas
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                string id = "0";
 
+                if (panelCadastroProduto.Visible == true)
+                {
+                    Modelo.ModeloProduto produto = new Modelo.ModeloProduto();
+                    produto.CodigoProduto = Int32.Parse(txtCodigoProduto.Text);
+                    produto.DescricaoProduto = txtDescricaoProduto.Text;
+                    produto.QuantidadeEstoque = Convert.ToDouble(txtQuantidade.Value);
+                    produto.Valor = Convert.ToDouble(txtvalor.Value);
+                    produto.IdUnidadeMedida = 1;
+
+                    id = new BLL.ProdutoBLL().Incluir(produto).ToString();
+
+                    //Apagando campos
+                    txtCodigoProduto.Text = "";
+                    txtDescricaoProduto.Text = "";
+                    txtQuantidade.Value = 0;
+                    txtvalor.Value = 0;
+                }
+
+                else if (PainelCadastroUnidadeMedida.Visible == true)
+                {
+                    Modelo.ModeloUnidadeMedida unidadeMedida = new Modelo.ModeloUnidadeMedida();
+                    unidadeMedida.CodigoUnidadeMedida = Int32.Parse(txtCodigo.Text);
+                    unidadeMedida.DescricaoUnidadeMedida = txtDescricao.Text;
+                    unidadeMedida.SiglaUnidadeMedida = txtSigla.Text;
+
+                    id = new BLL.UnidadeMedidaBLL().Incluir(unidadeMedida).ToString();
+
+                    //Apagando campos
+                    txtCodigo.Text = "";
+                    txtDescricao.Text = "";
+                    txtSigla.Text = "";
+                }
+
+                if(id.Equals("0"))
+                {
+                    MessageBox.Show("Falha ao Incluir Registro!");
+                }
+                else
+                {
+                    MessageBox.Show("Registro incluído com sucesso!");
+                }
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Falha ao incluir registro");
+            }
+           
         }
+
     }
 }

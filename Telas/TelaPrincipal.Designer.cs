@@ -234,7 +234,11 @@ namespace GestorDeEstoque.Telas
             // 
             // txtCodigoProduto
             // 
+            this.txtCodigoProduto.AutoCompleteCustomSource.AddRange(new string[] {
+            "0000000000"});
+            this.txtCodigoProduto.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.txtCodigoProduto.Location = new System.Drawing.Point(12, 33);
+            this.txtCodigoProduto.MaxLength = 10;
             this.txtCodigoProduto.Name = "txtCodigoProduto";
             this.txtCodigoProduto.Size = new System.Drawing.Size(100, 20);
             this.txtCodigoProduto.TabIndex = 5;
