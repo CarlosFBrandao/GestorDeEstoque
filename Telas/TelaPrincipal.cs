@@ -111,6 +111,7 @@ namespace GestorDeEstoque.Telas
                         {
                             btnExcluir.Enabled = true;
                             btnVoltar.Enabled = true;
+                            btnBuscar.Enabled = true;
                             dataGridProduto.Enabled = true;
 
                         }
@@ -147,22 +148,50 @@ namespace GestorDeEstoque.Telas
 
                 else if (PainelCadastroUnidadeMedida.Visible == true)
                 {
-                    if (txtDescricao.Text.Equals("") || txtSigla.Text.Equals(""))
-                    {
-                        MessageBox.Show("Favor preencher todos os campos");
-                    }
-                    else
+                    if (dataGridUnidadeMedida.Enabled == false)
                     {
                         Modelo.ModeloUnidadeMedida unidadeMedida = new Modelo.ModeloUnidadeMedida();
+                        
+                        unidadeMedida.IdUnidadeMedida = int.Parse(dataGridUnidadeMedida.CurrentRow.Cells[0].Value.ToString());
                         unidadeMedida.DescricaoUnidadeMedida = txtDescricao.Text;
                         unidadeMedida.SiglaUnidadeMedida = txtSigla.Text;
 
-                        id = new BLL.UnidadeMedidaBLL().Incluir(unidadeMedida).ToString();
+                        id = unidadeMedida.IdUnidadeMedida.ToString();
 
-                        //Apagando campos
-                        txtDescricao.Text = "";
-                        txtSigla.Text = "";
+                        bool retorno = new BLL.UnidadeMedidaBLL().Alterar(unidadeMedida);
 
+                        if (retorno)
+                        {
+                            btnExcluir.Enabled = true;
+                            btnVoltar.Enabled = true;
+                            dataGridUnidadeMedida.Enabled = true;
+                            btnBuscar.Enabled = true;
+
+                        }
+                        else
+                            MessageBox.Show("Favor verificar os parametros e tentar novamente");
+
+                    }
+                    else
+                    {
+
+                        if (txtDescricao.Text.Equals("") || txtSigla.Text.Equals(""))
+                        {
+                            MessageBox.Show("Favor preencher todos os campos");
+                        }
+                        else
+                        {
+                            Modelo.ModeloUnidadeMedida unidadeMedida = new Modelo.ModeloUnidadeMedida();
+                            unidadeMedida.DescricaoUnidadeMedida = txtDescricao.Text;
+                            unidadeMedida.SiglaUnidadeMedida = txtSigla.Text;
+
+                            id = new BLL.UnidadeMedidaBLL().Incluir(unidadeMedida).ToString();
+
+                            //Apagando campos
+                            txtDescricao.Text = "";
+                            txtSigla.Text = "";
+
+                        }
                     }
                 }
 
@@ -244,6 +273,7 @@ namespace GestorDeEstoque.Telas
         {
             btnExcluir.Enabled = false;
             btnVoltar.Enabled = false;
+            btnBuscar.Enabled = false;
             dataGridProduto.Enabled = false;
 
             txtDescricaoProduto.Text = dataGridProduto.CurrentRow.Cells[1].Value.ToString();
@@ -252,5 +282,46 @@ namespace GestorDeEstoque.Telas
             comboUnd.Text = dataGridProduto.CurrentRow.Cells[2].Value.ToString();
 
         }
+
+        private void dataGridUnidadeMedida_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            btnExcluir.Enabled = false;
+            btnVoltar.Enabled = false;
+            btnBuscar.Enabled = false;
+            dataGridUnidadeMedida.Enabled = false;
+
+            txtSigla.Text = dataGridUnidadeMedida.CurrentRow.Cells[1].Value.ToString();
+            txtDescricao.Text = dataGridUnidadeMedida.CurrentRow.Cells[2].Value.ToString();
+            
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            string strWhere;
+
+            if (panelCadastroProduto.Visible == true)
+            {
+                strWhere = txtDescricaoProduto.Text;
+
+                List<Modelo.ModeloProduto> listaProduto = new BLL.ProdutoBLL().BuscarProdutos(strWhere);
+                dataGridProduto.AutoGenerateColumns = false;
+                dataGridProduto.DataSource = listaProduto;
+                dataGridProduto.RowsDefaultCellStyle.BackColor = Color.White;
+                dataGridProduto.AlternatingRowsDefaultCellStyle.BackColor = Color.Lavender;
+            }
+            else
+            {
+                strWhere = txtDescricao.Text;
+
+                List<Modelo.ModeloUnidadeMedida> listaUnidadeMedida = new BLL.UnidadeMedidaBLL().Buscar(strWhere);
+                dataGridUnidadeMedida.AutoGenerateColumns = false;
+                dataGridUnidadeMedida.DataSource = listaUnidadeMedida;
+                dataGridUnidadeMedida.RowsDefaultCellStyle.BackColor = Color.White;
+                dataGridUnidadeMedida.AlternatingRowsDefaultCellStyle.BackColor = Color.Lavender;
+
+            }
+            
+        }
+
     }
 }

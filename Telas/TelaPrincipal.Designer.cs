@@ -63,9 +63,10 @@ namespace GestorDeEstoque.Telas
             this.PainelBotoes = new System.Windows.Forms.FlowLayoutPanel();
             this.btnSalvar = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.btnVoltar = new System.Windows.Forms.Button();
-            this.unidadeMedidaBLLBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.modeloUnidadeMedidaBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.unidadeMedidaBLLBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridUnidadeMedida)).BeginInit();
             this.PainelCadastroUnidadeMedida.SuspendLayout();
@@ -76,8 +77,8 @@ namespace GestorDeEstoque.Telas
             ((System.ComponentModel.ISupportInitialize)(this.modeloUnidadeMedidaBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtvalor)).BeginInit();
             this.PainelBotoes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.unidadeMedidaBLLBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.modeloUnidadeMedidaBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.unidadeMedidaBLLBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -130,6 +131,7 @@ namespace GestorDeEstoque.Telas
             this.dataGridUnidadeMedida.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridUnidadeMedida.Size = new System.Drawing.Size(757, 327);
             this.dataGridUnidadeMedida.TabIndex = 8;
+            this.dataGridUnidadeMedida.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dataGridUnidadeMedida_MouseDoubleClick);
             // 
             // CODIGO
             // 
@@ -356,10 +358,11 @@ namespace GestorDeEstoque.Telas
             this.PainelBotoes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.PainelBotoes.Controls.Add(this.btnSalvar);
             this.PainelBotoes.Controls.Add(this.btnExcluir);
+            this.PainelBotoes.Controls.Add(this.btnBuscar);
             this.PainelBotoes.Controls.Add(this.btnVoltar);
-            this.PainelBotoes.Location = new System.Drawing.Point(545, 27);
+            this.PainelBotoes.Location = new System.Drawing.Point(463, 27);
             this.PainelBotoes.Name = "PainelBotoes";
-            this.PainelBotoes.Size = new System.Drawing.Size(243, 27);
+            this.PainelBotoes.Size = new System.Drawing.Size(325, 27);
             this.PainelBotoes.TabIndex = 5;
             this.PainelBotoes.Visible = false;
             // 
@@ -385,9 +388,19 @@ namespace GestorDeEstoque.Telas
             this.btnExcluir.UseVisualStyleBackColor = true;
             this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Location = new System.Drawing.Point(165, 3);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscar.TabIndex = 3;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
             // btnVoltar
             // 
-            this.btnVoltar.Location = new System.Drawing.Point(165, 3);
+            this.btnVoltar.Location = new System.Drawing.Point(246, 3);
             this.btnVoltar.Name = "btnVoltar";
             this.btnVoltar.Size = new System.Drawing.Size(75, 23);
             this.btnVoltar.TabIndex = 2;
@@ -395,13 +408,13 @@ namespace GestorDeEstoque.Telas
             this.btnVoltar.UseVisualStyleBackColor = true;
             this.btnVoltar.Click += new System.EventHandler(this.btnVoltar_Click_1);
             // 
-            // unidadeMedidaBLLBindingSource
-            // 
-            this.unidadeMedidaBLLBindingSource.DataSource = typeof(BLL.UnidadeMedidaBLL);
-            // 
             // modeloUnidadeMedidaBindingSource
             // 
             this.modeloUnidadeMedidaBindingSource.DataSource = typeof(Modelo.ModeloUnidadeMedida);
+            // 
+            // unidadeMedidaBLLBindingSource
+            // 
+            this.unidadeMedidaBLLBindingSource.DataSource = typeof(BLL.UnidadeMedidaBLL);
             // 
             // TelaPrincipal
             // 
@@ -410,8 +423,8 @@ namespace GestorDeEstoque.Telas
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.PainelBotoes);
-            this.Controls.Add(this.panelCadastroProduto);
             this.Controls.Add(this.PainelCadastroUnidadeMedida);
+            this.Controls.Add(this.panelCadastroProduto);
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(816, 489);
@@ -432,8 +445,8 @@ namespace GestorDeEstoque.Telas
             ((System.ComponentModel.ISupportInitialize)(this.modeloUnidadeMedidaBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtvalor)).EndInit();
             this.PainelBotoes.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.unidadeMedidaBLLBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.modeloUnidadeMedidaBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.unidadeMedidaBLLBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -477,5 +490,6 @@ namespace GestorDeEstoque.Telas
         private System.Windows.Forms.DataGridViewTextBoxColumn UNIDADEMEDIDA;
         private System.Windows.Forms.DataGridViewTextBoxColumn VALOR;
         private System.Windows.Forms.DataGridViewTextBoxColumn QUANTIDADE;
+        private System.Windows.Forms.Button btnBuscar;
     }
 }
