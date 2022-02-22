@@ -30,6 +30,15 @@ namespace GestorDeEstoque.Telas
                 dataGridProduto.RowsDefaultCellStyle.BackColor = Color.White;
                 dataGridProduto.AlternatingRowsDefaultCellStyle.BackColor = Color.Lavender;
             }
+            else if (panelMovimento.Visible == true)
+            {
+                List<Modelo.ModeloMovimento> movimento = new BLL.MovimentoBLL().Buscar(strWhere);
+                dataGridMovimento.AutoGenerateColumns = false;
+                dataGridMovimento.DataSource = movimento;
+                dataGridMovimento.RowsDefaultCellStyle.BackColor = Color.White;
+                dataGridMovimento.AlternatingRowsDefaultCellStyle.BackColor = Color.Lavender;
+
+            }
             else
             {
                 List<Modelo.ModeloUnidadeMedida> listaUnidadeMedida = new BLL.UnidadeMedidaBLL().Buscar(strWhere);
@@ -48,6 +57,7 @@ namespace GestorDeEstoque.Telas
             PainelCadastroUnidadeMedida.Visible = true;
             PainelBotoes.Visible = true;
             panelCadastroProduto.Visible = false;
+            panelMovimento.Visible = false;
             CarregaGrid();
         }
 
@@ -65,9 +75,10 @@ namespace GestorDeEstoque.Telas
             panelCadastroProduto.Visible = true;
             PainelBotoes.Visible = true;
             PainelCadastroUnidadeMedida.Visible = false;
+            panelMovimento.Visible = false;
             CarregaGrid();
 
-            
+
             List<Modelo.ModeloUnidadeMedida> listaUnidadeMedida = new BLL.UnidadeMedidaBLL().Buscar("");
             comboUnd.DataSource = listaUnidadeMedida;
             comboUnd.DisplayMember = "SiglaUnidadeMedida";
@@ -151,7 +162,7 @@ namespace GestorDeEstoque.Telas
                     if (dataGridUnidadeMedida.Enabled == false)
                     {
                         Modelo.ModeloUnidadeMedida unidadeMedida = new Modelo.ModeloUnidadeMedida();
-                        
+
                         unidadeMedida.IdUnidadeMedida = int.Parse(dataGridUnidadeMedida.CurrentRow.Cells[0].Value.ToString());
                         unidadeMedida.DescricaoUnidadeMedida = txtDescricao.Text;
                         unidadeMedida.SiglaUnidadeMedida = txtSigla.Text;
@@ -242,7 +253,7 @@ namespace GestorDeEstoque.Telas
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
             DialogResult result;
 
-            result = MessageBox.Show(message, "",buttons);
+            result = MessageBox.Show(message, "", buttons);
 
             if (result == System.Windows.Forms.DialogResult.Yes)
             {
@@ -292,7 +303,7 @@ namespace GestorDeEstoque.Telas
 
             txtSigla.Text = dataGridUnidadeMedida.CurrentRow.Cells[1].Value.ToString();
             txtDescricao.Text = dataGridUnidadeMedida.CurrentRow.Cells[2].Value.ToString();
-            
+
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -320,7 +331,155 @@ namespace GestorDeEstoque.Telas
                 dataGridUnidadeMedida.AlternatingRowsDefaultCellStyle.BackColor = Color.Lavender;
 
             }
-            
+
+        }
+
+        private void btnVoltarMovimento_Click(object sender, EventArgs e)
+        {
+            panelMovimento.Visible = false;
+        }
+
+        private void lançamentosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panelMovimento.Visible = true;
+            PainelBotoes.Visible = false;
+            CarregaGrid();
+            List<Modelo.ModeloProduto> listaProduto = new BLL.ProdutoBLL().BuscarProdutos("");
+            comboProduto.DataSource = listaProduto;
+            comboProduto.DisplayMember = "DescricaoProduto";
+            comboProduto.ValueMember = "IdProduto";
+            comboProduto.Text = "";
+
+        }
+
+
+        //Métodos da tela movimento
+        private void btnSalvarMovimento_Click(object sender, EventArgs e)
+        {
+            double quantidade = double.Parse(numericQuantidade.Value.ToString());
+            string tipo;
+
+            if (!comboProduto.SelectedText.Equals("") || quantidade > 0)
+            {
+                int idProduto = int.Parse(comboProduto.SelectedValue.ToString());
+                Modelo.ModeloProduto produto = new Modelo.ModeloProduto();
+                produto = new BLL.ProdutoBLL().RetrornaPorID(idProduto);
+
+                if (radioSaida.Checked)
+                {
+                    if (produto.QuantidadeEstoque < quantidade)
+                    {
+                        MessageBox.Show("Quantidade em Estoque insuficiente");
+                        return;
+                    }
+                    else
+                    {
+                        produto.QuantidadeEstoque = produto.QuantidadeEstoque - quantidade;
+                        tipo = "S";
+
+                    }
+                }
+                else
+                {
+                    produto.QuantidadeEstoque = produto.QuantidadeEstoque + quantidade;
+                    tipo = "E";
+                }
+                Modelo.ModeloMovimento movimento = new Modelo.ModeloMovimento();
+                movimento.idProduto = idProduto;
+                movimento.Quantidade = quantidade;
+                movimento.ValorTotal = double.Parse(textValorTotalMovimento.Text);
+                movimento.Tipo = tipo;
+
+                new BLL.MovimentoBLL().Incluir(movimento);
+                new BLL.ProdutoBLL().Alterar(produto);
+
+                CarregaGrid();
+
+                //Limpa campos
+                comboProduto.Text = "";
+                numericQuantidade.Value = 0;
+                textUndMovimento.Text = "";
+
+            }
+            else
+                MessageBox.Show("Favor preencher os campos");
+
+            CarregaGrid();
+        }
+
+        private void comboProduto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Modelo.ModeloProduto produto = new Modelo.ModeloProduto();
+                produto = new BLL.ProdutoBLL().RetrornaPorID(Convert.ToInt32(comboProduto.SelectedValue));
+
+                textUndMovimento.Text = produto.UND;
+                textValorUnitarioMovimento.Text = produto.Valor.ToString();
+            }
+            catch (Exception)
+            {
+            }
+
+        }
+
+        private void numericQuantidade_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                double valorTotal;
+                valorTotal = double.Parse(numericQuantidade.Value.ToString()) * double.Parse(textValorUnitarioMovimento.Text);
+                textValorTotalMovimento.Text = valorTotal.ToString();
+            }
+            catch (Exception)
+            {
+
+            }
+
+        }
+
+        private void comboProduto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void comboUnd_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void btnExcluirMovimento_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string message = "Tem certeza que deseja excluir o registro selecionado?";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result;
+
+                result = MessageBox.Show(message, "", buttons);
+
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    Modelo.ModeloMovimento movimento = new Modelo.ModeloMovimento();
+                    movimento.idMovimento = int.Parse(dataGridMovimento.CurrentRow.Cells[1].Value.ToString());
+                    movimento.Quantidade = double.Parse(dataGridMovimento.CurrentRow.Cells[4].Value.ToString());
+                    movimento.Tipo = dataGridMovimento.CurrentRow.Cells[0].Value.ToString();
+
+                    bool retorno = new BLL.MovimentoBLL().Excluir(movimento);
+
+                    if (retorno)
+                        MessageBox.Show("Registro excluído com sucesso");
+                    else
+                        MessageBox.Show("Falha ao tentar excluir o registro");
+                }
+
+                CarregaGrid();
+            }
+            catch
+            {
+                MessageBox.Show("Selecione o registro que deseja excluir!");
+            }
+
         }
 
     }

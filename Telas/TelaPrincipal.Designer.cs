@@ -30,10 +30,13 @@ namespace GestorDeEstoque.Telas
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TelaPrincipal));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.cadastrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unidadeDeMedidaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.produtosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.movimentosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lançamentosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridUnidadeMedida = new System.Windows.Forms.DataGridView();
             this.CODIGO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SIGLA = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,6 +70,30 @@ namespace GestorDeEstoque.Telas
             this.btnVoltar = new System.Windows.Forms.Button();
             this.modeloUnidadeMedidaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.unidadeMedidaBLLBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.panelMovimento = new System.Windows.Forms.Panel();
+            this.dataGridMovimento = new System.Windows.Forms.DataGridView();
+            this.tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codigoMovimento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descricaoProdutoMovimento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Und = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QuantidadeProdutoMovimento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ValorUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ValorTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnVoltarMovimento = new System.Windows.Forms.Button();
+            this.btnExcluirMovimento = new System.Windows.Forms.Button();
+            this.btnSalvarMovimento = new System.Windows.Forms.Button();
+            this.radioSaida = new System.Windows.Forms.RadioButton();
+            this.radioEntrada = new System.Windows.Forms.RadioButton();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textValorTotalMovimento = new System.Windows.Forms.TextBox();
+            this.textValorUnitarioMovimento = new System.Windows.Forms.TextBox();
+            this.textUndMovimento = new System.Windows.Forms.TextBox();
+            this.comboProduto = new System.Windows.Forms.ComboBox();
+            this.numericQuantidade = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridUnidadeMedida)).BeginInit();
             this.PainelCadastroUnidadeMedida.SuspendLayout();
@@ -79,12 +106,16 @@ namespace GestorDeEstoque.Telas
             this.PainelBotoes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.modeloUnidadeMedidaBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.unidadeMedidaBLLBindingSource)).BeginInit();
+            this.panelMovimento.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridMovimento)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericQuantidade)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cadastrosToolStripMenuItem});
+            this.cadastrosToolStripMenuItem,
+            this.movimentosToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -113,6 +144,21 @@ namespace GestorDeEstoque.Telas
             this.produtosToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.produtosToolStripMenuItem.Text = "Produtos";
             this.produtosToolStripMenuItem.Click += new System.EventHandler(this.produtosToolStripMenuItem_Click);
+            // 
+            // movimentosToolStripMenuItem
+            // 
+            this.movimentosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lançamentosToolStripMenuItem});
+            this.movimentosToolStripMenuItem.Name = "movimentosToolStripMenuItem";
+            this.movimentosToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
+            this.movimentosToolStripMenuItem.Text = "Movimentos";
+            // 
+            // lançamentosToolStripMenuItem
+            // 
+            this.lançamentosToolStripMenuItem.Name = "lançamentosToolStripMenuItem";
+            this.lançamentosToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.lançamentosToolStripMenuItem.Text = "Lançamentos";
+            this.lançamentosToolStripMenuItem.Click += new System.EventHandler(this.lançamentosToolStripMenuItem_Click);
             // 
             // dataGridUnidadeMedida
             // 
@@ -293,6 +339,7 @@ namespace GestorDeEstoque.Telas
             this.comboUnd.Size = new System.Drawing.Size(121, 21);
             this.comboUnd.TabIndex = 8;
             this.comboUnd.SelectedIndexChanged += new System.EventHandler(this.comboUnd_SelectedIndexChanged);
+            this.comboUnd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboUnd_KeyPress);
             // 
             // modeloUnidadeMedidaBindingSource2
             // 
@@ -416,6 +463,246 @@ namespace GestorDeEstoque.Telas
             // 
             this.unidadeMedidaBLLBindingSource.DataSource = typeof(BLL.UnidadeMedidaBLL);
             // 
+            // panelMovimento
+            // 
+            this.panelMovimento.Controls.Add(this.numericQuantidade);
+            this.panelMovimento.Controls.Add(this.dataGridMovimento);
+            this.panelMovimento.Controls.Add(this.btnVoltarMovimento);
+            this.panelMovimento.Controls.Add(this.btnExcluirMovimento);
+            this.panelMovimento.Controls.Add(this.btnSalvarMovimento);
+            this.panelMovimento.Controls.Add(this.radioSaida);
+            this.panelMovimento.Controls.Add(this.radioEntrada);
+            this.panelMovimento.Controls.Add(this.label9);
+            this.panelMovimento.Controls.Add(this.label8);
+            this.panelMovimento.Controls.Add(this.label7);
+            this.panelMovimento.Controls.Add(this.label2);
+            this.panelMovimento.Controls.Add(this.label1);
+            this.panelMovimento.Controls.Add(this.textValorTotalMovimento);
+            this.panelMovimento.Controls.Add(this.textValorUnitarioMovimento);
+            this.panelMovimento.Controls.Add(this.textUndMovimento);
+            this.panelMovimento.Controls.Add(this.comboProduto);
+            this.panelMovimento.Location = new System.Drawing.Point(12, 27);
+            this.panelMovimento.Name = "panelMovimento";
+            this.panelMovimento.Size = new System.Drawing.Size(776, 411);
+            this.panelMovimento.TabIndex = 6;
+            this.panelMovimento.Visible = false;
+            // 
+            // dataGridMovimento
+            // 
+            this.dataGridMovimento.AllowUserToAddRows = false;
+            this.dataGridMovimento.AllowUserToDeleteRows = false;
+            this.dataGridMovimento.AllowUserToOrderColumns = true;
+            this.dataGridMovimento.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridMovimento.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.tipo,
+            this.codigoMovimento,
+            this.descricaoProdutoMovimento,
+            this.Und,
+            this.QuantidadeProdutoMovimento,
+            this.ValorUnitario,
+            this.ValorTotal});
+            this.dataGridMovimento.Location = new System.Drawing.Point(3, 120);
+            this.dataGridMovimento.Name = "dataGridMovimento";
+            this.dataGridMovimento.ReadOnly = true;
+            this.dataGridMovimento.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridMovimento.Size = new System.Drawing.Size(773, 288);
+            this.dataGridMovimento.TabIndex = 15;
+            // 
+            // tipo
+            // 
+            this.tipo.DataPropertyName = "tipo";
+            this.tipo.HeaderText = "Tipo";
+            this.tipo.Name = "tipo";
+            this.tipo.ReadOnly = true;
+            this.tipo.Width = 50;
+            // 
+            // codigoMovimento
+            // 
+            this.codigoMovimento.DataPropertyName = "idmovimento";
+            this.codigoMovimento.HeaderText = "Código";
+            this.codigoMovimento.Name = "codigoMovimento";
+            this.codigoMovimento.ReadOnly = true;
+            // 
+            // descricaoProdutoMovimento
+            // 
+            this.descricaoProdutoMovimento.DataPropertyName = "descricaoProduto";
+            this.descricaoProdutoMovimento.HeaderText = "Descrição Produto";
+            this.descricaoProdutoMovimento.Name = "descricaoProdutoMovimento";
+            this.descricaoProdutoMovimento.ReadOnly = true;
+            this.descricaoProdutoMovimento.Width = 250;
+            // 
+            // Und
+            // 
+            this.Und.DataPropertyName = "UND";
+            this.Und.HeaderText = "Und";
+            this.Und.Name = "Und";
+            this.Und.ReadOnly = true;
+            this.Und.Width = 50;
+            // 
+            // QuantidadeProdutoMovimento
+            // 
+            this.QuantidadeProdutoMovimento.DataPropertyName = "quantidade";
+            this.QuantidadeProdutoMovimento.HeaderText = "Quantidade";
+            this.QuantidadeProdutoMovimento.Name = "QuantidadeProdutoMovimento";
+            this.QuantidadeProdutoMovimento.ReadOnly = true;
+            // 
+            // ValorUnitario
+            // 
+            this.ValorUnitario.DataPropertyName = "valorunitario";
+            this.ValorUnitario.HeaderText = "Valor Unitário";
+            this.ValorUnitario.Name = "ValorUnitario";
+            this.ValorUnitario.ReadOnly = true;
+            // 
+            // ValorTotal
+            // 
+            this.ValorTotal.DataPropertyName = "ValorTotal";
+            this.ValorTotal.HeaderText = "Total";
+            this.ValorTotal.Name = "ValorTotal";
+            this.ValorTotal.ReadOnly = true;
+            // 
+            // btnVoltarMovimento
+            // 
+            this.btnVoltarMovimento.Location = new System.Drawing.Point(694, 86);
+            this.btnVoltarMovimento.Name = "btnVoltarMovimento";
+            this.btnVoltarMovimento.Size = new System.Drawing.Size(75, 23);
+            this.btnVoltarMovimento.TabIndex = 14;
+            this.btnVoltarMovimento.Text = "Voltar";
+            this.btnVoltarMovimento.UseVisualStyleBackColor = true;
+            this.btnVoltarMovimento.Click += new System.EventHandler(this.btnVoltarMovimento_Click);
+            // 
+            // btnExcluirMovimento
+            // 
+            this.btnExcluirMovimento.ForeColor = System.Drawing.Color.Red;
+            this.btnExcluirMovimento.Location = new System.Drawing.Point(616, 86);
+            this.btnExcluirMovimento.Name = "btnExcluirMovimento";
+            this.btnExcluirMovimento.Size = new System.Drawing.Size(75, 23);
+            this.btnExcluirMovimento.TabIndex = 13;
+            this.btnExcluirMovimento.Text = "Excluir";
+            this.btnExcluirMovimento.UseVisualStyleBackColor = true;
+            this.btnExcluirMovimento.Click += new System.EventHandler(this.btnExcluirMovimento_Click);
+            // 
+            // btnSalvarMovimento
+            // 
+            this.btnSalvarMovimento.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnSalvarMovimento.Location = new System.Drawing.Point(535, 86);
+            this.btnSalvarMovimento.Name = "btnSalvarMovimento";
+            this.btnSalvarMovimento.Size = new System.Drawing.Size(75, 23);
+            this.btnSalvarMovimento.TabIndex = 12;
+            this.btnSalvarMovimento.Text = "Salvar";
+            this.btnSalvarMovimento.UseVisualStyleBackColor = true;
+            this.btnSalvarMovimento.Click += new System.EventHandler(this.btnSalvarMovimento_Click);
+            // 
+            // radioSaida
+            // 
+            this.radioSaida.AutoSize = true;
+            this.radioSaida.Location = new System.Drawing.Point(101, 15);
+            this.radioSaida.Name = "radioSaida";
+            this.radioSaida.Size = new System.Drawing.Size(54, 17);
+            this.radioSaida.TabIndex = 11;
+            this.radioSaida.TabStop = true;
+            this.radioSaida.Text = "Saída";
+            this.radioSaida.UseVisualStyleBackColor = true;
+            // 
+            // radioEntrada
+            // 
+            this.radioEntrada.AutoSize = true;
+            this.radioEntrada.Checked = true;
+            this.radioEntrada.Location = new System.Drawing.Point(12, 15);
+            this.radioEntrada.Name = "radioEntrada";
+            this.radioEntrada.Size = new System.Drawing.Size(62, 17);
+            this.radioEntrada.TabIndex = 10;
+            this.radioEntrada.TabStop = true;
+            this.radioEntrada.Text = "Entrada";
+            this.radioEntrada.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(669, 44);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(61, 13);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "Valor Total:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(560, 44);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(73, 13);
+            this.label8.TabIndex = 8;
+            this.label8.Text = "Valor Unitario:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(454, 44);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(65, 13);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "Quantidade:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(351, 44);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(34, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "UND:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 43);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(47, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Produto:";
+            // 
+            // textValorTotalMovimento
+            // 
+            this.textValorTotalMovimento.Enabled = false;
+            this.textValorTotalMovimento.Location = new System.Drawing.Point(669, 60);
+            this.textValorTotalMovimento.Name = "textValorTotalMovimento";
+            this.textValorTotalMovimento.Size = new System.Drawing.Size(100, 20);
+            this.textValorTotalMovimento.TabIndex = 4;
+            // 
+            // textValorUnitarioMovimento
+            // 
+            this.textValorUnitarioMovimento.Enabled = false;
+            this.textValorUnitarioMovimento.Location = new System.Drawing.Point(563, 60);
+            this.textValorUnitarioMovimento.Name = "textValorUnitarioMovimento";
+            this.textValorUnitarioMovimento.Size = new System.Drawing.Size(100, 20);
+            this.textValorUnitarioMovimento.TabIndex = 3;
+            // 
+            // textUndMovimento
+            // 
+            this.textUndMovimento.Enabled = false;
+            this.textUndMovimento.Location = new System.Drawing.Point(351, 60);
+            this.textUndMovimento.Name = "textUndMovimento";
+            this.textUndMovimento.Size = new System.Drawing.Size(100, 20);
+            this.textUndMovimento.TabIndex = 1;
+            // 
+            // comboProduto
+            // 
+            this.comboProduto.FormattingEnabled = true;
+            this.comboProduto.Location = new System.Drawing.Point(12, 59);
+            this.comboProduto.Name = "comboProduto";
+            this.comboProduto.Size = new System.Drawing.Size(333, 21);
+            this.comboProduto.TabIndex = 0;
+            this.comboProduto.SelectedIndexChanged += new System.EventHandler(this.comboProduto_SelectedIndexChanged);
+            this.comboProduto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboProduto_KeyPress);
+            // 
+            // numericQuantidade
+            // 
+            this.numericQuantidade.DecimalPlaces = 3;
+            this.numericQuantidade.Location = new System.Drawing.Point(457, 60);
+            this.numericQuantidade.Name = "numericQuantidade";
+            this.numericQuantidade.Size = new System.Drawing.Size(100, 20);
+            this.numericQuantidade.TabIndex = 16;
+            this.numericQuantidade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericQuantidade_KeyPress_1);
+            // 
             // TelaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -423,15 +710,17 @@ namespace GestorDeEstoque.Telas
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.PainelBotoes);
+            this.Controls.Add(this.panelMovimento);
             this.Controls.Add(this.PainelCadastroUnidadeMedida);
             this.Controls.Add(this.panelCadastroProduto);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(816, 489);
             this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "TelaPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TelaPrincipal";
+            this.Text = "Controle de Estoque";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridUnidadeMedida)).EndInit();
@@ -447,6 +736,10 @@ namespace GestorDeEstoque.Telas
             this.PainelBotoes.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.modeloUnidadeMedidaBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.unidadeMedidaBLLBindingSource)).EndInit();
+            this.panelMovimento.ResumeLayout(false);
+            this.panelMovimento.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridMovimento)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericQuantidade)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -491,5 +784,31 @@ namespace GestorDeEstoque.Telas
         private System.Windows.Forms.DataGridViewTextBoxColumn VALOR;
         private System.Windows.Forms.DataGridViewTextBoxColumn QUANTIDADE;
         private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.Panel panelMovimento;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textValorTotalMovimento;
+        private System.Windows.Forms.TextBox textValorUnitarioMovimento;
+        private System.Windows.Forms.TextBox textUndMovimento;
+        private System.Windows.Forms.ComboBox comboProduto;
+        private System.Windows.Forms.Button btnVoltarMovimento;
+        private System.Windows.Forms.Button btnExcluirMovimento;
+        private System.Windows.Forms.Button btnSalvarMovimento;
+        private System.Windows.Forms.RadioButton radioSaida;
+        private System.Windows.Forms.RadioButton radioEntrada;
+        private System.Windows.Forms.DataGridView dataGridMovimento;
+        private System.Windows.Forms.ToolStripMenuItem movimentosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lançamentosToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tipo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codigoMovimento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn descricaoProdutoMovimento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Und;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QuantidadeProdutoMovimento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ValorUnitario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ValorTotal;
+        private System.Windows.Forms.NumericUpDown numericQuantidade;
     }
 }
