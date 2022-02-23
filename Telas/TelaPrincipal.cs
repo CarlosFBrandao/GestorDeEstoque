@@ -262,13 +262,21 @@ namespace GestorDeEstoque.Telas
                 {
                     Modelo.ModeloProduto produto = new Modelo.ModeloProduto();
                     produto.IdProduto = int.Parse(dataGridProduto.CurrentRow.Cells[0].Value.ToString());
-                    new BLL.ProdutoBLL().Excluir(Convert.ToInt32(produto.IdProduto));
+
+                    if (new BLL.ProdutoBLL().ExisteMovimento(produto.IdProduto) > 0)
+                        MessageBox.Show("Não é possível excluir o produto pois existe lançamentos!");
+                    else
+                        new BLL.ProdutoBLL().Excluir(Convert.ToInt32(produto.IdProduto));
                 }
                 else
                 {
                     Modelo.ModeloUnidadeMedida und = new Modelo.ModeloUnidadeMedida();
                     und.IdUnidadeMedida = int.Parse(dataGridUnidadeMedida.CurrentRow.Cells[0].Value.ToString());
-                    new BLL.UnidadeMedidaBLL().Excluir(Convert.ToInt32(und.IdUnidadeMedida));
+
+                    if (new BLL.UnidadeMedidaBLL().ExisteProduto(und.IdUnidadeMedida) > 0)
+                        MessageBox.Show("Não é possível excluir a Unidade de Medida pois está relacionada a um produto!");
+                    else
+                        new BLL.UnidadeMedidaBLL().Excluir(Convert.ToInt32(und.IdUnidadeMedida));
                 }
             }
             CarregaGrid();
@@ -343,6 +351,9 @@ namespace GestorDeEstoque.Telas
         {
             panelMovimento.Visible = true;
             PainelBotoes.Visible = false;
+            panelCadastroProduto.Visible = false;
+            PainelCadastroUnidadeMedida.Visible = false;
+
             CarregaGrid();
             List<Modelo.ModeloProduto> listaProduto = new BLL.ProdutoBLL().BuscarProdutos("");
             comboProduto.DataSource = listaProduto;
@@ -481,6 +492,5 @@ namespace GestorDeEstoque.Telas
             }
 
         }
-
     }
 }

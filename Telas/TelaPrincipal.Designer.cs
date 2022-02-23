@@ -69,7 +69,6 @@ namespace GestorDeEstoque.Telas
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnVoltar = new System.Windows.Forms.Button();
             this.modeloUnidadeMedidaBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.unidadeMedidaBLLBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panelMovimento = new System.Windows.Forms.Panel();
             this.dataGridMovimento = new System.Windows.Forms.DataGridView();
             this.tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -94,6 +93,7 @@ namespace GestorDeEstoque.Telas
             this.textUndMovimento = new System.Windows.Forms.TextBox();
             this.comboProduto = new System.Windows.Forms.ComboBox();
             this.numericQuantidade = new System.Windows.Forms.NumericUpDown();
+            this.unidadeMedidaBLLBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridUnidadeMedida)).BeginInit();
             this.PainelCadastroUnidadeMedida.SuspendLayout();
@@ -105,10 +105,10 @@ namespace GestorDeEstoque.Telas
             ((System.ComponentModel.ISupportInitialize)(this.txtvalor)).BeginInit();
             this.PainelBotoes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.modeloUnidadeMedidaBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.unidadeMedidaBLLBindingSource)).BeginInit();
             this.panelMovimento.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMovimento)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericQuantidade)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.unidadeMedidaBLLBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -459,10 +459,6 @@ namespace GestorDeEstoque.Telas
             // 
             this.modeloUnidadeMedidaBindingSource.DataSource = typeof(Modelo.ModeloUnidadeMedida);
             // 
-            // unidadeMedidaBLLBindingSource
-            // 
-            this.unidadeMedidaBLLBindingSource.DataSource = typeof(BLL.UnidadeMedidaBLL);
-            // 
             // panelMovimento
             // 
             this.panelMovimento.Controls.Add(this.numericQuantidade);
@@ -703,6 +699,10 @@ namespace GestorDeEstoque.Telas
             this.numericQuantidade.TabIndex = 16;
             this.numericQuantidade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericQuantidade_KeyPress_1);
             // 
+            // unidadeMedidaBLLBindingSource
+            // 
+            this.unidadeMedidaBLLBindingSource.DataSource = typeof(BLL.UnidadeMedidaBLL);
+            // 
             // TelaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -735,11 +735,11 @@ namespace GestorDeEstoque.Telas
             ((System.ComponentModel.ISupportInitialize)(this.txtvalor)).EndInit();
             this.PainelBotoes.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.modeloUnidadeMedidaBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.unidadeMedidaBLLBindingSource)).EndInit();
             this.panelMovimento.ResumeLayout(false);
             this.panelMovimento.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMovimento)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericQuantidade)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.unidadeMedidaBLLBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
