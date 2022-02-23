@@ -90,7 +90,7 @@ namespace GestorDeEstoque.Telas
                 arquivo.WriteLine(txtSenha.Text);
                 arquivo.Close();
                 new CriaTabelas().Criar();
-                MessageBox.Show("Salvo!");
+                MessageBox.Show("Salvo com sucesso!");
             }
             catch (Exception erro)
             {

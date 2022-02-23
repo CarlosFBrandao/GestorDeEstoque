@@ -53,8 +53,9 @@ namespace GestorDeEstoque.Telas
             // 
             this.txtSenha.Location = new System.Drawing.Point(59, 92);
             this.txtSenha.Name = "txtSenha";
+            this.txtSenha.PasswordChar = '*';
             this.txtSenha.Size = new System.Drawing.Size(157, 20);
-            this.txtSenha.TabIndex = 2;
+            this.txtSenha.TabIndex = 4;
             // 
             // txtUsuario
             // 
@@ -68,14 +69,14 @@ namespace GestorDeEstoque.Telas
             this.txtBanco.Location = new System.Drawing.Point(59, 40);
             this.txtBanco.Name = "txtBanco";
             this.txtBanco.Size = new System.Drawing.Size(157, 20);
-            this.txtBanco.TabIndex = 4;
+            this.txtBanco.TabIndex = 2;
             // 
             // txtInstancia
             // 
             this.txtInstancia.Location = new System.Drawing.Point(59, 14);
             this.txtInstancia.Name = "txtInstancia";
             this.txtInstancia.Size = new System.Drawing.Size(157, 20);
-            this.txtInstancia.TabIndex = 5;
+            this.txtInstancia.TabIndex = 1;
             // 
             // label1
             // 
@@ -118,7 +119,7 @@ namespace GestorDeEstoque.Telas
             this.btnTestarConexao.Location = new System.Drawing.Point(40, 118);
             this.btnTestarConexao.Name = "btnTestarConexao";
             this.btnTestarConexao.Size = new System.Drawing.Size(75, 23);
-            this.btnTestarConexao.TabIndex = 10;
+            this.btnTestarConexao.TabIndex = 5;
             this.btnTestarConexao.Text = "Testar";
             this.btnTestarConexao.UseVisualStyleBackColor = true;
             this.btnTestarConexao.Click += new System.EventHandler(this.btnTestarConexao_Click);
@@ -128,7 +129,7 @@ namespace GestorDeEstoque.Telas
             this.btnSalvar.Location = new System.Drawing.Point(121, 118);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(75, 23);
-            this.btnSalvar.TabIndex = 11;
+            this.btnSalvar.TabIndex = 6;
             this.btnSalvar.Text = "Salvar";
             this.btnSalvar.UseVisualStyleBackColor = true;
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
