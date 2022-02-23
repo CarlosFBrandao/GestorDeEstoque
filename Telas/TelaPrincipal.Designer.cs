@@ -37,6 +37,7 @@ namespace GestorDeEstoque.Telas
             this.produtosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.movimentosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lançamentosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridUnidadeMedida = new System.Windows.Forms.DataGridView();
             this.CODIGO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SIGLA = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,6 +71,7 @@ namespace GestorDeEstoque.Telas
             this.btnVoltar = new System.Windows.Forms.Button();
             this.modeloUnidadeMedidaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panelMovimento = new System.Windows.Forms.Panel();
+            this.numericQuantidade = new System.Windows.Forms.NumericUpDown();
             this.dataGridMovimento = new System.Windows.Forms.DataGridView();
             this.tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.codigoMovimento = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -92,8 +94,9 @@ namespace GestorDeEstoque.Telas
             this.textValorUnitarioMovimento = new System.Windows.Forms.TextBox();
             this.textUndMovimento = new System.Windows.Forms.TextBox();
             this.comboProduto = new System.Windows.Forms.ComboBox();
-            this.numericQuantidade = new System.Windows.Forms.NumericUpDown();
             this.unidadeMedidaBLLBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.configuraçõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.conexãoBDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridUnidadeMedida)).BeginInit();
             this.PainelCadastroUnidadeMedida.SuspendLayout();
@@ -106,8 +109,8 @@ namespace GestorDeEstoque.Telas
             this.PainelBotoes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.modeloUnidadeMedidaBindingSource)).BeginInit();
             this.panelMovimento.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridMovimento)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericQuantidade)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridMovimento)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.unidadeMedidaBLLBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -115,7 +118,9 @@ namespace GestorDeEstoque.Telas
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cadastrosToolStripMenuItem,
-            this.movimentosToolStripMenuItem});
+            this.movimentosToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.configuraçõesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -156,9 +161,14 @@ namespace GestorDeEstoque.Telas
             // lançamentosToolStripMenuItem
             // 
             this.lançamentosToolStripMenuItem.Name = "lançamentosToolStripMenuItem";
-            this.lançamentosToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.lançamentosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.lançamentosToolStripMenuItem.Text = "Lançamentos";
             this.lançamentosToolStripMenuItem.Click += new System.EventHandler(this.lançamentosToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(12, 20);
             // 
             // dataGridUnidadeMedida
             // 
@@ -483,6 +493,15 @@ namespace GestorDeEstoque.Telas
             this.panelMovimento.TabIndex = 6;
             this.panelMovimento.Visible = false;
             // 
+            // numericQuantidade
+            // 
+            this.numericQuantidade.DecimalPlaces = 3;
+            this.numericQuantidade.Location = new System.Drawing.Point(457, 60);
+            this.numericQuantidade.Name = "numericQuantidade";
+            this.numericQuantidade.Size = new System.Drawing.Size(100, 20);
+            this.numericQuantidade.TabIndex = 16;
+            this.numericQuantidade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericQuantidade_KeyPress_1);
+            // 
             // dataGridMovimento
             // 
             this.dataGridMovimento.AllowUserToAddRows = false;
@@ -690,18 +709,24 @@ namespace GestorDeEstoque.Telas
             this.comboProduto.SelectedIndexChanged += new System.EventHandler(this.comboProduto_SelectedIndexChanged);
             this.comboProduto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboProduto_KeyPress);
             // 
-            // numericQuantidade
-            // 
-            this.numericQuantidade.DecimalPlaces = 3;
-            this.numericQuantidade.Location = new System.Drawing.Point(457, 60);
-            this.numericQuantidade.Name = "numericQuantidade";
-            this.numericQuantidade.Size = new System.Drawing.Size(100, 20);
-            this.numericQuantidade.TabIndex = 16;
-            this.numericQuantidade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericQuantidade_KeyPress_1);
-            // 
             // unidadeMedidaBLLBindingSource
             // 
             this.unidadeMedidaBLLBindingSource.DataSource = typeof(BLL.UnidadeMedidaBLL);
+            // 
+            // configuraçõesToolStripMenuItem
+            // 
+            this.configuraçõesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.conexãoBDToolStripMenuItem});
+            this.configuraçõesToolStripMenuItem.Name = "configuraçõesToolStripMenuItem";
+            this.configuraçõesToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
+            this.configuraçõesToolStripMenuItem.Text = "Configurações";
+            // 
+            // conexãoBDToolStripMenuItem
+            // 
+            this.conexãoBDToolStripMenuItem.Name = "conexãoBDToolStripMenuItem";
+            this.conexãoBDToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.conexãoBDToolStripMenuItem.Text = "Conexão BD";
+            this.conexãoBDToolStripMenuItem.Click += new System.EventHandler(this.conexãoBDToolStripMenuItem_Click);
             // 
             // TelaPrincipal
             // 
@@ -737,8 +762,8 @@ namespace GestorDeEstoque.Telas
             ((System.ComponentModel.ISupportInitialize)(this.modeloUnidadeMedidaBindingSource)).EndInit();
             this.panelMovimento.ResumeLayout(false);
             this.panelMovimento.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridMovimento)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericQuantidade)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridMovimento)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.unidadeMedidaBLLBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -810,5 +835,8 @@ namespace GestorDeEstoque.Telas
         private System.Windows.Forms.DataGridViewTextBoxColumn ValorUnitario;
         private System.Windows.Forms.DataGridViewTextBoxColumn ValorTotal;
         private System.Windows.Forms.NumericUpDown numericQuantidade;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem configuraçõesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem conexãoBDToolStripMenuItem;
     }
 }

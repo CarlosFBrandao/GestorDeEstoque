@@ -492,5 +492,11 @@ namespace GestorDeEstoque.Telas
             }
 
         }
+
+        private void conexãoBDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmConfiguraConexao().Show();
+
+        }
     }
 }
